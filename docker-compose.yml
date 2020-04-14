@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  backend:
+    container_name: blue-backend
+    build:
+      context: ./django
+      dockerfile: Dockerfile
+    image: blue_backend:v1
+    env_file: django/backend/config/.env
+    command: /start_prod.sh
+    volumes:
+      - .:/blue
+      - backend-static:/blue/static
+    ports:
+      - "8000:8000"
+    networks:
+      - blue-net
+
+  nginx:
+    container_name: blue-nginx
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: blue_nginx:v1
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./nginx/prod.conf:/etc/nginx/nginx.conf:ro
+      - backend-static:/usr/src/blue/static
+    networks:
+      - blue-net
+  
+  # db:
+  #   image: mysql
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=mysqlroot
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASSWORD=mysqlroot
+  #     - MYSQL_DATABASE=blue_dev
+  #   ports:
+  #     - "3306:3306"
+  #   networks:
+  #     - blue-net
+
+volumes:
+  backend-static:
+
+networks:
+  blue-net:
+    driver: bridge

@@ -11,3 +11,7 @@ class UserListView(generics.ListAPIView):
     serializer_class = serializers.UserSerializer
     permission_classes = [IsAuthenticated]
     
+class UserUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = models.CustomUser.objects.all()
+    serializer_class = serializers.UserSerializer
+    permission_classes = [IsAuthenticated]

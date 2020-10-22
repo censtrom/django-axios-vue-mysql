@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'rest_auth',
     'corsheaders',
 
+    'webpack_loader',
+
     'backend.api',
 
     'backend.user',

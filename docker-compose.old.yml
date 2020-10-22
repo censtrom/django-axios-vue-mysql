@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3'
 
 services:
   backend:
@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     image: blue-backend:v1
     env_file: django/backend/config/.env
-    # command: /start_prod.sh
+    command: /start_prod.sh
     volumes:
       - .:/blue
       - backend-static:/blue/static
@@ -33,6 +33,18 @@ services:
     networks:
       - blue-net
   
+  # db:
+  #   image: mysql
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=mysqlroot
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASSWORD=mysqlroot
+  #     - MYSQL_DATABASE=blue_dev
+  #   ports:
+  #     - "3306:3306"
+  #   networks:
+  #     - blue-net
+
 volumes:
   backend-static:
 

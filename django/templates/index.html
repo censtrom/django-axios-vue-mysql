@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,6 +17,34 @@
   <p>Go to http://127.0.0.1:8000/api/v1/user/ to view the API endpoint</p>
   <p>Go to http://127.0.0.1:8000/admin/ for the Django admin login</p>
   <div id="app"></div>
+</body>
+
+</html> -->
+
+{% load render_bundle from webpack_loader %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vue App</title>
+  <meta http-equiv=X-UA-Compatible content="IE=edge">
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <!-- <link rel=icon href="{% static 'Favicon.png' %}"> {% render_bundle 'chunk-vendors' %}
+  <script src="https://js.stripe.com/v3/"></script> -->
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+
+<div id=app>
+  </div>
+  {% render_bundle 'app' %}
+
 </body>
 
 </html>
